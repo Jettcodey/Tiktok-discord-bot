@@ -1,5 +1,6 @@
 # Tiktok-discord-bot
 A simple Discord bot that automatically detects TikTok links from an entire channel and saves them in a downloadable text file.
+(And ofc It can also be used to detect other Domains in channel)
 
 ## Permissions
 
