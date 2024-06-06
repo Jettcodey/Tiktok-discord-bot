@@ -17,3 +17,6 @@ Or just give it admin Permisions ;D (in a Private server ofc)
 
 - [ ] Send Single Downloaded Video/Image Posts Without Watermark in Channel.
 - [ ] Automatically generating a text file after a Specified amount of time has passed.
+
+## Known Issues
+Using the /search command in a Channel with too many Links causes an error because of the Discord message length cap.
