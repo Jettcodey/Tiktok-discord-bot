@@ -20,7 +20,7 @@ It should work with just the following permissions:
 - 'Attach Files'
 - 'Use Slash Commands'
 
-Or just give it admin Permisions ;D (in a Private server ofc)
+Or just give it admin Permissions ;D (in a Private server ofc)
 
 ## Roadmap
 
