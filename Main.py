@@ -3,6 +3,7 @@ import json
 import httpx
 import asyncio
 import aiohttp
+import asyncio
 import discord
 from discord import app_commands
 from discord.ext import commands
@@ -65,7 +66,7 @@ async def get_video(url, watermark):
         url_media = video_data['video']['download_addr']['url_list'][0] if watermark else video_data['video']['play_addr']['url_list'][0]
     return {'url': url_media, 'images': image_urls, 'id': id_video}
 
-async def get_redirect_url(url: str) -> str:
+async def get_redirect_url(url: str) -> str:    #Redirecting isn´t working for now
     try:
         async with httpx.AsyncClient() as client:
             response = await client.head(url, allow_redirects=True)
@@ -161,6 +162,7 @@ async def txt(interaction: discord.Interaction):
     app_commands.Choice(name="With Watermark", value="with"),
     app_commands.Choice(name="No Watermark", value="no")
 ])
+
 async def download(interaction: discord.Interaction, url: str, watermark: app_commands.Choice[str]):
     """Download media from a TikTok URL with or without watermark."""
     await interaction.response.defer()
@@ -169,7 +171,9 @@ async def download(interaction: discord.Interaction, url: str, watermark: app_co
     if media:
         await interaction.followup.send(f"Media URL: {media['url']}")
         if media['images']:
-            await interaction.followup.send(f"Image URLs: {', '.join(media['images'])}")
+            for image_url in media['images']:
+                await interaction.followup.send(f"Image URL: {image_url}")
+                await asyncio.sleep(2)
         await download_media(media, "downloads/")
     else:
         await interaction.followup.send("Failed to retrieve media data.")
