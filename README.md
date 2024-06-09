@@ -26,6 +26,7 @@ Or just give it admin Permisions ;D (in a Private server ofc)
 
 - [x] Send Single Downloaded Video/Image Posts Without Watermark in Channel.
 - [ ] Automatically generating a text file after a Specified amount of time has passed.
+- [ ] Handle multiple request at once.
 
 ## Known Issues
 Using the `/download` command with a Photo post sends a `"Media URL: None"` before sending all images in the channel.
