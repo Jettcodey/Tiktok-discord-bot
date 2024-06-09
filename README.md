@@ -1,6 +1,14 @@
 # Tiktok-discord-bot
-A simple Discord bot that automatically detects TikTok links from an entire channel and saves them in a downloadable text file.
-(And ofc It can also be used to detect other Domains in channel)
+A simple Discord bot that Scans a Discord channel for TikTok links and shows/saves them in a downloadable text file.
+
+# Slash Commands
+
+- `/search`: Kind of useless but still included, does almost the same as `/txt`.
+
+- `/txt`: Searches by default 1000 messages for any TikTok link and puts them in a downloadable text file.
+
+- `/download`: Give a link to a TikTok post and it will post the direct link to download them in the channel.
+
 
 ## Permissions
 
@@ -16,8 +24,8 @@ Or just give it admin Permisions ;D (in a Private server ofc)
 
 ## Roadmap
 
-- [ ] Send Single Downloaded Video/Image Posts Without Watermark in Channel.
+- [x] Send Single Downloaded Video/Image Posts Without Watermark in Channel.
 - [ ] Automatically generating a text file after a Specified amount of time has passed.
 
 ## Known Issues
-Using the /search command in a Channel with too many Links causes an error because of the Discord message length cap.
+Using the `/download` command with a Photo post sends a `"Media URL: None"` before sending all images in the channel.
