@@ -1,9 +1,9 @@
 # Tiktok-discord-bot
-A simple Discord bot that Scans a Discord channel for TikTok links and shows/saves them in a downloadable text file.
+A simple Discord bot that Scans a Discord channel for TikTok links and shows/saves them in a downloadable text file or get a Direct Dowmload link to Videos/Images.
 
 ## Slash Commands
 
-- `/search`: Kind of useless but still included, does almost the same as `/txt`.
+- `/search`: Kind of useless but still included, does almost the same as `/txt`, but is very buggy and can´t search in big channels.
 
 - `/txt`: Searches by default 1000 messages for any TikTok link and puts them in a downloadable text file.
 
