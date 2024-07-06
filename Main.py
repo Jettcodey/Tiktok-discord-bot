@@ -3,6 +3,7 @@ import json
 import httpx
 import asyncio
 import aiohttp
+import logging
 import asyncio
 import discord
 from discord import app_commands
@@ -78,10 +79,14 @@ async def get_redirect_url(url: str) -> str:    #Redirecting isn´t working for 
         print(f"Error in getting the RedirectURL: {ex}")
         return url
     
-async def get_id_video(url: str) -> str:
-    if "/t/" in url:
-        url = await get_redirect_url(url)
 
+async def get_id_video_or_redi(url: str) -> str:
+    if "/t/" in url:
+        return await get_id_redi(url)
+    else:
+        return await get_id_video(url)
+
+async def get_id_video(url: str) -> str:
     matching = "/video/" in url
     matching_photo = "/photo/" in url
     if matching:
@@ -97,6 +102,31 @@ async def get_id_video(url: str) -> str:
         id_video = id_video[:id_video.index("?")]
 
     return id_video
+
+async def get_id_redi(url: str) -> str:
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url, allow_redirects=False) as response:
+                if response.status in (301, 302):
+                    redirected_url = response.headers.get('Location')
+                    if redirected_url:
+                        match = re.search(r'https://www.tiktok.com/(video|photo)/([a-zA-Z0-9_-]+)', redirected_url)
+                        if match:
+                            return match.group(2)
+                        else:
+                            print("Error: Invalid redirected TikTok URL format")
+                            return ''
+                    else:
+                        print("Error: No redirect URL found")
+                        return ''
+                else:
+                    print("Error: No redirect found")
+                    return ''
+    except Exception as ex:
+        logging.error(f"Error in getting the redirect URL: {ex}")
+        raise
+
+
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -179,4 +209,3 @@ async def download(interaction: discord.Interaction, url: str, watermark: app_co
         await interaction.followup.send("Failed to retrieve media data.")
 
 bot.run('YOUR_BOT_TOKEN')  # Replace 'YOUR_BOT_TOKEN' with your actual bot token
-
